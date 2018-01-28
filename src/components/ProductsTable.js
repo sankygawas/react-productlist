@@ -17,7 +17,7 @@ class ProductsTable extends Component{
               rows.push(<Product product={product} key={product.name}/>);
           previousCategory = product.category;
       })
-        return <table className="table w-25 mx-auto">
+        return <table className="table w-25 mx-auto table-bordered">
             <thead className="thead-dark">
               <tr>
                 <th scope="col">Name</th>

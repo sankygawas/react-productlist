@@ -12,10 +12,24 @@ class FilterableProductTable extends Component {
     };
   }
   onHandleSearch = (searchValue)=>{
-    let filteredList = this.props.products.filter((item)=>{
-        return item.name.toLowerCase().search(searchValue.toLowerCase()) !== -1;
-    })
+    let filteredList = this.props.products.filter(item => {
+      return item.name
+          .toLowerCase()
+          .search(searchValue.toLowerCase()) !== -1;
+    });
     this.setState({ updatedList: filteredList});
+  }
+
+  onHandleStockCheck = (checked)=>{
+    let filteredList = this.props.products;
+    if(checked){
+      filteredList = this.state.updatedList.filter(item => {
+        return item.stocked === checked;
+      });
+      
+    }
+   
+    this.setState({ updatedList: filteredList });
   }
 
   render() {
@@ -23,8 +37,8 @@ class FilterableProductTable extends Component {
     return <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-          <SearchBar handleSearch={this.onHandleSearch} />
+          <h1 className="App-title">Products List</h1>
+          <SearchBar handleSearch={this.onHandleSearch} handleCheck={this.onHandleStockCheck} />
         </header>
         <ProductsTable products={this.state.updatedList} />
       </div>;
